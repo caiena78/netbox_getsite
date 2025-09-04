@@ -1,0 +1,1 @@
+Ansible Role to get the site from netbox based on the ansible_host ip address

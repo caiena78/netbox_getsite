@@ -1,0 +1,40 @@
+---  
+
+    - name: Find prefix containing current host IP from NetBox using uri module
+      ansible.builtin.uri:
+        url: "{{ netbox_url }}/api/ipam/prefixes/?contains={{ ansible_host }}"
+        method: GET
+        headers:
+          Authorization: "Token {{ netbox_token }}"
+        validate_certs: "{{ netbox_validate_certs }}"
+        return_content: yes
+        status_code: 200
+      register: prefix_response
+
+
+    - name: Set site_name variable from prefix info
+      set_fact:
+        site_url: "{{ prefix_response.json.results[0].scope.url }}"
+      when:
+        - prefix_response.json.results is defined
+        - prefix_response.json.results | length > 0
+        - prefix_response.json.results[0].scope.url is defined # Ensure the site attribute exists
+
+
+
+    - name: Get site details from NetBox using site_name and uri module
+      ansible.builtin.uri:
+        url: "{{ site_url }}"
+        method: GET
+        headers:
+          Authorization: "Token {{ netbox_token }}"
+        validate_certs: "{{ netbox_validate_certs }}"
+        return_content: yes
+        status_code: 200
+      register: netbox_site_response
+      when: site_url is defined # Only run if site_url was successfully set
+
+
+
+
+

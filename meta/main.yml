@@ -1,0 +1,11 @@
+---
+galaxy_info:
+  license: MIT
+  min_ansible_version: "1.00"
+  role_name: netbox_getsite
+  author: Chad Aiena
+  description: Ansible Role to get the site from netbox
+  company: Sapphire Health
+# collections: []
+# dependencies: []
+...
