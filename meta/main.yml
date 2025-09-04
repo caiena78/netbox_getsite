@@ -4,7 +4,7 @@ galaxy_info:
   min_ansible_version: "1.00"
   role_name: netbox_getsite
   author: Chad Aiena
-  description: Ansible Role to get the site from netbox
+  description: Ansible Role to get the site from netbox based on the ansible_host ip address
   company: Sapphire Health
 # collections: []
 # dependencies: []
