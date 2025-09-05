@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   license: MIT
-  min_ansible_version: "1.00"
+  min_ansible_version: "2.10"
   role_name: netbox_getsite
   author: Chad Aiena
   description: Ansible Role to get the site from netbox based on the ansible_host ip address
