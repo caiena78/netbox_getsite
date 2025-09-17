@@ -15,28 +15,25 @@
     - name: Show all matching prefixes (formatted)
       debug:
         msg: "{{ prefix_response.json.results}}"
+      when: netbox_debug
 
-
-
-
-
-    - name: Extract longest matching prefix
+    - name: Extract site from the longest matching prefix
       set_fact:
-        longest_prefix: "{{ prefix_response.json.results | sort(attribute='prefix', reverse=True) | first }}"
+        netbox_site: "{{ prefix_response.json.results | sort(attribute='prefix', reverse=True) | first }}"
 
 
 
-    - name: show longest prefix
+    - name: show site
       debug:
-        msg: "{{ longest_prefix}}"
-
+        msg: "{{ netbox_site}}"
+      when: netbox_debug
 
 
 
 
     - name: Set site_name variable from prefix info
       set_fact:
-        site_url: "{{ longest_prefix.scope.url }}"
+        site_url: "{{ netbox_site.scope.url }}"
       when:
         - prefix_response.json.results is defined
         - prefix_response.json.results | length > 0

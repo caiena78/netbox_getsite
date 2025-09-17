@@ -3,3 +3,4 @@
 netbox_url: "{{ lookup('env', 'NETBOX_URL') }}"
 netbox_token: "{{ lookup('env', 'NETBOX_API') }}"
 netbox_validate_certs: false
+netbox_debug: false
