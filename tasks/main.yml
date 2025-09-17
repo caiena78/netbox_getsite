@@ -12,9 +12,31 @@
       register: prefix_response
 
 
+    - name: Show all matching prefixes (formatted)
+      debug:
+        msg: "{{ prefix_response.json.results}}"
+
+
+
+
+
+    - name: Extract longest matching prefix
+      set_fact:
+        longest_prefix: "{{ prefix_response.json.results | sort(attribute='prefix', reverse=True) | first }}"
+
+
+
+    - name: show longest prefix
+      debug:
+        msg: "{{ longest_prefix}}"
+
+
+
+
+
     - name: Set site_name variable from prefix info
       set_fact:
-        site_url: "{{ prefix_response.json.results[0].scope.url }}"
+        site_url: "{{ longest_prefix.scope.url }}"
       when:
         - prefix_response.json.results is defined
         - prefix_response.json.results | length > 0
