@@ -30,14 +30,22 @@
 
 
 
-
     - name: Set site_name variable from prefix info
       set_fact:
         site_url: "{{ netbox_site.scope.url }}"
       when:
-        - prefix_response.json.results is defined
-        - prefix_response.json.results | length > 0
-        - prefix_response.json.results[0].scope.url is defined # Ensure the site attribute exists
+        - netbox_site is defined        
+        - netbox_site.scope.url is defined # Ensure the site attribute exists
+
+
+
+    # - name: Set site_name variable from prefix info
+    #   set_fact:
+    #     site_url: "{{ netbox_site.scope.url }}"
+    #   when:
+    #     - prefix_response.json.results is defined
+    #     - prefix_response.json.results | length > 0
+    #     - prefix_response.json.results[0].scope.url is defined # Ensure the site attribute exists
 
 
 
